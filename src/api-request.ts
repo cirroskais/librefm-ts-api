@@ -92,10 +92,12 @@ export class LastFMApiRequest<T> {
 			try {
 				data = JSON.parse(response);
 			} catch (err) {
+				console.log(response);
 				throw new Error(`lastfm-ts-api: Unable to parse LastFM API response to JSON. API response is ${err}`);
 			}
 
 			if (data?.error) {
+				console.log(response, paramsStr);
 				throw new Error(`lastfm-ts-api: ${data?.message ?? 'LastFM API returned an error.'}`);
 			}
 
@@ -133,8 +135,8 @@ export class LastFMApiRequest<T> {
 				? method
 				: undefined
 			: typeof callback === 'function'
-			? callback
-			: undefined;
+				? callback
+				: undefined;
 	}
 
 	private getMethod(method?: string | LastFMUnknownFunction): string | LastFMUnknownFunction | undefined {
@@ -143,8 +145,8 @@ export class LastFMApiRequest<T> {
 
 	private getOptions(method: string | LastFMUnknownFunction | undefined, params: string): RequestOptions {
 		const options: RequestOptions = {
-			hostname: 'ws.audioscrobbler.com',
-			path: '/2.0'
+			hostname: 'libre.fm',
+			path: '/2.0/'
 		};
 
 		if (method === 'POST') {
