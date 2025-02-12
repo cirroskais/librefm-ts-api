@@ -19,4 +19,4 @@ Thumbs.db
 
 # Project specific
 .env
-/dist
+# /dist
